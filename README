@@ -1,0 +1,21 @@
+Class: cronlock
+Language: PHP
+Author: Vlad Fratila
+Email: vlad.fratila@gmail.com
+Version: 1.0.0
+Date: 09-14-2010
+
+This class implements cronjob locking to prevent concurent processes from running.
+Locks are kept on the filesystem.
+ 
+Setup:
+ You need to include config.php inside this directory in your cron job file.
+ See config options there.
+ 
+Usage: 
+ You need to wrap your entire cron job like this:
+ 
+ if(lock::lock() !== FALSE){
+ 	//execute your job here
+ 	lock::unlock();
+ }

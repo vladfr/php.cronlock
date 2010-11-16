@@ -6,14 +6,16 @@
  * 
  * Setup:
  * You need to include config.php inside this directory in your cron job file.
- * See config options there.
  * 
  * Usage: You need to wrap your entire cron job like this:
  * if(lock::lock() !== FALSE){
- * 	//execute your job here
- * 	lock::unlock();
+ *  //execute your job here
+ *  lock::unlock();
  * }
  * 
+ * Use lock::getData() and lock::setData() to get and set persistent data for the lock pid.
+ * Data is saved only on a successful lock-unlock process. If you want to save it in other cases use lock::saveData();
+ * If you want to delete all data associated with a lock pid, just set the pid, then call lock::delData();
  * 
  * @author Vlad Fratila
  * @version 1.0.0
@@ -28,7 +30,7 @@ require dirname(__FILE__).'/lock.class.php';
 
 //set the identifier (lock id). 
 //If you use this class in multiple jobs, you need to set this from the cron job file
-lock::$lid = 'my_function';
+lock::$lid = 'alertecandidati';
 
 //your temp dir, it will hold lock files and logs for all the cron jobs
 lock::$lock_dir = dirname(__FILE__).'/tmp/';
